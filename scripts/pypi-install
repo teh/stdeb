@@ -39,7 +39,7 @@ def find_tar_gz(package_name, pypi_url = 'http://python.org/pypi',verbose=0):
         for url in urls:
             if url['packagetype']=='sdist':
                 assert url['python_version']=='source', 'how can an sdist not be a source?'
-                if url['url'].endswith('.tar.gz'):
+                if url['url'].endswith('.tar.gz') or url['url'].endswith('zip'):
                     download_url = url['url']
                     if 'md5_digest' in url:
                         expected_md5_digest = url['md5_digest']
@@ -108,7 +108,11 @@ def main():
             myprint('downloading to %s'%tmpdir)
         os.chdir( tmpdir )
         tarball_fname = get_source_tarball(package_name,verbose=options.verbose)
-        cmd = 'tar xzf %s' % tarball_fname
+
+        if tarball_fname.endswith('.tar.gz'):
+            cmd = 'tar xzf %s' % tarball_fname
+        else:
+            cmd = 'unzip %s' % tarball_fname
         if options.verbose >= 2:
             myprint('executing: %s'%cmd)
         subprocess.check_call(cmd, shell=True)
