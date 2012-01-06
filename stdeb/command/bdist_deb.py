@@ -1,4 +1,6 @@
 import os
+import subprocess
+
 import stdeb.util as util
 from stdeb.command.sdist_dsc import sdist_dsc
 
@@ -37,7 +39,10 @@ class bdist_deb(Command):
             raise ValueError('could not find debian source directory')
 
         # define system command to execute (gen .deb binary pkg)
-        syscmd = ['dpkg-buildpackage','-rfakeroot','-uc','-b']
-
-        util.process_command(syscmd,cwd=target_dir)
+        subprocess.check_call([
+            'dpkg-buildpackage',
+            '-rfakeroot',
+            '-uc',
+            '-b',
+        ], cwd=target_dir)
 
