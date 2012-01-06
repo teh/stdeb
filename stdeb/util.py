@@ -36,9 +36,8 @@ PYSUPPORT_MIN_VERS = '0.8.4' # Namespace package support was added
                              # 0.8.4lenny1 (Lenny). Might be able to
                              # back this down.
 
-import exceptions
-class CalledProcessError(exceptions.Exception): pass
-class CantSatisfyRequirement(exceptions.Exception): pass
+class CalledProcessError(Exception): pass
+class CantSatisfyRequirement(Exception): pass
 
 def check_call(*popenargs, **kwargs):
     retcode = subprocess.call(*popenargs, **kwargs)
