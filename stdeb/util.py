@@ -8,16 +8,25 @@ import tempfile
 import stdeb
 from stdeb import log, __version__ as __stdeb_version__
 
-if hasattr(os,'link'):
+if hasattr(os, 'link'):
     link_func = os.link
 else:
     # matplotlib deletes link from os namespace, expected distutils workaround
     link_func = shutil.copyfile
 
-__all__ = ['DebianInfo','build_dsc','expand_tarball','expand_zip',
-           'stdeb_cmdline_opts','stdeb_cmd_bool_opts','recursive_hardlink',
-           'apply_patch','repack_tarball_with_debianized_dirname',
-           'expand_sdist_file','stdeb_cfg_options']
+__all__ = [
+    'DebianInfo',
+    'build_dsc',
+    'expand_tarball',
+    'expand_zip',
+    'stdeb_cmdline_opts',
+    'stdeb_cmd_bool_opts',
+    'recursive_hardlink',
+    'apply_patch',
+    'repack_tarball_with_debianized_dirname',
+    'expand_sdist_file',
+    'stdeb_cfg_options',
+]
 
 DH_MIN_VERS = '7'       # Fundamental to stdeb >= 0.4
 DH_IDEAL_VERS = '7.4.3' # fixes Debian bug 548392
